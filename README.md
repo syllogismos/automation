@@ -6,6 +6,11 @@
 4. After the extension loads, pin the extension to the toolbar. Click on the extension icon and click on `RUN` button in the popup.
 5. It should open up the market watch page in a new tab, select the NASDAQ section, pick the second stock and open the webform in another tab fill all the relevant fields and submit the form.
 
+## Relevant Files
+
+1. `src/pages/Popup/Popup.jsx`
+2. `src/Content/index.js`
+
 ## Notes.
 
 1. I used `chrome.storage` to store data from various places so that content scripts can do relevant automation when they land on the respective pages.
@@ -25,3 +30,8 @@
 
 1. I need to make the code more modular so that I can compose multiple actions in a task. Say here, I just have two steps. What if I have multiple steps in a certain automation task.
 2. How to I track and handle failures in steps.
+
+## Things I found tricky.
+
+1. New to chrome extension development, I had some trouble getting started, figuring out debugging various components. Need to explore more on how to use message passing, background scripts and etc.
+2. DOM navigation of single page apps.
