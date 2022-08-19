@@ -4,22 +4,15 @@ import Greetings from '../../containers/Greetings/Greetings';
 import './Popup.css';
 
 const Popup = () => {
+  
+  const handleClick = () => {
+    chrome.storage.sync.set({routine: "stock_pick"});
+    console.log("going to stock pick page")
+    chrome.tabs.create({ url: 'https://www.cnbc.com/us-market-movers/' });
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/pages/Popup/Popup.jsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!
-        </a>
-      </header>
+      <button onClick={handleClick}>RUN</button>
     </div>
   );
 };
