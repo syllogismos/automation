@@ -26,7 +26,6 @@ function clickNasdaq() {
     console.log(nasdaqButton);
     nasdaqButton.click();
     setTimeout(readTable, 1000);
-
 }
 
 function readTable() {
@@ -47,23 +46,23 @@ function readTable() {
 }
 
 if (url.startsWith("https://forms.zohopublic.in")) {
-    console.log("This is the form page");
-
-    chrome.storage.sync.get('stock_pick', ({ stock_pick }) => {
-        if (stock_pick !== undefined) {
-            console.log(stock_pick);
-            let { name, percentage } = stock_pick;
-            console.log(name);
-            console.log(percentage);
-            var name_input = document.getElementsByName("SingleLine")[0];
-            var percentage_input = document.getElementsByName("SingleLine1")[0];
-            var time_stamp_input = document.getElementsByName("SingleLine2")[0];
-            name_input.value = name;
-            percentage_input.value = percentage;
-            time_stamp_input.value = Math.floor(Date.now() / 1000);
-            chrome.storage.sync.set({ 'stock_pick': undefined });
-        }
-    });
+    // console.log("This is the form page");
+    let stock_pick = await chrome.storage.sync.get('stock_pick');
+    if (stock_pick && Object.keys(stock_pick).length > 0) {
+        console.log(stock_pick);
+        let { name, percentage } = stock_pick.stock_pick;
+        console.log(name);
+        console.log(percentage);
+        var name_input = document.getElementsByName("SingleLine")[0];
+        var percentage_input = document.getElementsByName("SingleLine1")[0];
+        var time_stamp_input = document.getElementsByName("SingleLine2")[0];
+        name_input.value = name;
+        percentage_input.value = percentage;
+        time_stamp_input.value = Math.floor(Date.now() / 1000);
+        await chrome.storage.sync.remove('stock_pick');
+        let submit_buttons = document.getElementsByClassName("fmSmtButton");
+        submit_buttons[0].click();
+    }
 }
 
 
